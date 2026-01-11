@@ -1,118 +1,71 @@
-                                                                                                                                      # aws-infrastructure-automation-terraform
-                                                                                                                                  AWS infrastructure automation using Terraform (IaC)
-This repository contains a Terraform project that automates the creation of AWS infrastructure using Infrastructure as Code (IaC).
-The main purpose of this project is to practice and demonstrate how AWS resources can be provisioned in a clean, repeatable, and scalable way.
+Two-Tier Architecture on AWS using Terraform
 
-    What this project does
-    
-Uses Terraform to provision AWS infrastructure
+This project demonstrates a basic two-tier architecture on AWS, built and managed using Terraform. It is designed to help beginners understand how infrastructure can be created and managed as code, while also learning how an application layer and a database layer work together in the cloud.
 
-Keeps the configuration modular and reusable
+The setup focuses on simplicity and clarity, making it suitable for learning, practice, and small proof-of-concept projects
 
-Follows basic security and IaC best practices
+Architecture Overview
 
-Designed for learning as well as real-world reference
+In this architecture, users access the application through the internet. The application runs on an Amazon EC2 instance deployed in a public subnet. This EC2 instance handles the application logic and communicates with an Amazon RDS database placed in a private subnet. The database is not exposed to the internet, which helps keep the data secure.
+All AWS resources in this project are provisioned using Terraform, allowing the infrastructure to be created, updated, and destroyed in a repeatable and reliable way.
 
-This project can be used by anyone who is starting with Terraform on AWS or wants a simple automation example.
+Components Created with Terraform
 
-Tools and Technologies
+* Amazon VPC
+* Public Subnet
+* Private Subnet
+* Internet Gateway
+* Route Tables
+* Amazon EC2 (Application Layer)
+* Amazon RDS (Database Layer)
+* Security Group
 
-Terraform
+How It Works
 
-AWS
+1. Terraform creates the networking resources (VPC, subnets, route tables).
+2. An EC2 instance is launched in the public subnet.
+3. An RDS database is created in the private subnet.
+4. Security groups control traffic between the EC2 instance and the database.
+5. Users access the application through the EC2 instance, which interacts with the database.
 
-Infrastructure as Code (IaC)
-
-AWS Services Used
-
-Depending on the configuration, this project may include:
-
-Amazon EC2
-
-Amazon VPC
-
-Security Groups
-
-Application Load Balancer (ALB)
-
-IAM resources
-
-Project Structure
-.
-├── main.tf          # Main infrastructure resources
-├── provider.tf      # AWS provider configuration
-├── variables.tf     # Input variables
-├── output.tf        # Output values
-├── module/          # Reusable Terraform modules
-├── .gitignore       # Terraform and sensitive files
-└── README.md
-
-How to run this project
 Prerequisites
 
-Terraform installed
+. Basic knowledge of AWS services such as EC2, RDS, and VPC
+. Beginner-level understanding of Terraform and Infrastructure as Code
+. Terraform installed on your local machine
+. AWS CLI configured with valid credentials
+. An active AWS account
 
-AWS CLI installed
+Basic Networking Knowledge (Helpful)
 
-AWS credentials configured locally
+. What an IP address is
+. Difference between public and private IP addresses
+. Basic understanding of VPC, subnets, and CIDR blocks
+. Familiarity with security groups and how they control traffic
 
-aws configure
+You don’t need deep networking expertise just enough to understand how resources communicate with each other.
 
-Steps
-
-Clone the repository
-
-git clone https://github.com/Shashank-ray2053/aws-infrastructure-automation-terraform.git
-
-
-Go to the project directory
-
-cd aws-infrastructure-automation-terraform
-
-Initialize Terraform
+How to Deploy
 
 terraform init
-
-
-Review the plan
-
 terraform plan
-
-
-Apply the configuration
-
 terraform apply
 
-Security notes
+How to Destroy the Infrastructure
 
-Terraform state files are excluded using .gitignore
+terraform destroy
 
-AWS credentials are not stored in the repository
+Use Cases
 
-Variables are used instead of hardcoding values
+1. Learning Terraform basics
+2. Understanding two-tier architecture
+3. Practicing Infrastructure as Code (IaC)
+4. Small demos and proof-of-concept projects
 
-    What I learned from this project
+Limitations
 
-How Terraform manages AWS resources
+* Single Availability Zone
+* No load balancer or auto scaling
+* Not intended for production use
 
-How to structure Terraform files properly
-
-How to automate infrastructure using IaC
-
-Importance of security and clean repository setup
-
-Future improvements
-
-Add more AWS services
-
-Improve modularization
-
-Add architecture diagram
-
-Integrate Ansible for configuration management
-
-
-
-      License
-
-This project is licensed under the MIT License.
+Note: This project is for learning purposes. Production environments require additional components such as multi-AZ setups, load balancers, NAT gateways, and monitoring.
